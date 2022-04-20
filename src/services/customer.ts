@@ -1,14 +1,22 @@
+import getHostByEnviroment from "@/helpers/utils";
+import { Customer } from "@/models/customer";
+import { request} from 'umi'
 
+const baseUrl = getHostByEnviroment();
 
 export async function queryCustomerList() {
-  // TODO: remove domain
-  return fetch('http://localhost:5200/api/customers')
-  .then(response => response.json())
-  .then(response => response.customers);
+  return await request<{data: Customer[]}>(`${baseUrl}/api/customers`);
 }
 
+export async function createCustomer(customer: Customer) {
+  return await request<Customer>(`${baseUrl}/api/customers`, {
+    method: 'POST',
+    body: JSON.stringify(customer),
+    headers : {
+      'Content-Type': 'application/json'
+    }});
+}
 
-export async function removeCustomer(id: string) {
-  const res = await fetch(`/api/customers/${id}`, { method: 'DELETE' });
-  return await res.json();
+export async function removeCustomer(id: number) {
+  return await request(`${baseUrl}/api/customers/${id}`, { method: 'DELETE' });
 }

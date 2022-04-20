@@ -1,11 +1,13 @@
+import moment from 'moment';
 import { defineConfig } from 'umi';
+import ptBR from 'antd/lib/locale/pt_BR';
 
 export default defineConfig({
   nodeModulesTransform: {
     type: 'none',
   },
   layout: {
-    name: 'Ant Design Pro',
+    name: 'Gestão de Locação',
     // copy from pro site
     navTheme: 'dark',
     primaryColor: '#1890ff',
@@ -13,9 +15,12 @@ export default defineConfig({
     contentWidth: 'Fluid',
     fixedHeader: false,
     fixSiderbar: false,
-    title: 'Ant Design Pro',
+    title: 'Gestão de Locação',
     pwa: false,
     iconfontUrl: '',
+  },
+  locale: {
+    default: ptBR.locale,
   },
   routes: [
     { path: '/', component: '@/pages/index', name: 'Inicio' },

@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+  web:
+    container_name: movie-rent-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '1337:80'
+    networks:
+      - movierentalapi_common_network
+networks:
+  movierentalapi_common_network:
+    external: true
